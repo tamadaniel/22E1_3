@@ -1,0 +1,47 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+filtered_df: 
+  type: pandas.ParquetDataSet
+  filepath: data/02_intermediate/filtered_df.parquet
+
+filtered_df_metrics:
+  type: kedro_mlflow.io.metrics.MlflowMetricsDataSet
+
+X_train: 
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/X_train.parquet
+
+X_test: 
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/X_test.parquet
+
+y_train: 
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/y_train.parquet
+
+y_test: 
+  type: pandas.ParquetDataSet
+  filepath: data/03_primary/y_test.parquet
+
+lr_model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  
+  data_set:
+    type: kedro_mlflow.io.models.MlflowModelSaverDataSet
+    filepath: data/06_models/lr_model
+    flavor: mlflow.sklearn
+
+lr_metrics:
+  type: kedro_mlflow.io.metrics.MlflowMetricsDataSet
+
+
+lda_model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataSet
+  data_set:
+    type: kedro_mlflow.io.models.MlflowModelSaverDataSet
+    filepath: data/06_models/lda_model
+    flavor: mlflow.sklearn   
+    
